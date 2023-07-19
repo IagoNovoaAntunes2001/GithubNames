@@ -6,8 +6,8 @@ import com.githubnames.domain.user.UserRepositoryImpl
 import org.koin.dsl.module
 
 val repositoriesModule = module {
-    single<UserRepository> { buildUserRepositoryImpl(get()) }
+    single<UserRepository> { provideUserRepository(get()) }
 }
 
-private fun buildUserRepositoryImpl(userRemote: UserRemote) =
+private fun provideUserRepository(userRemote: UserRemote) =
     UserRepositoryImpl(userRemote = userRemote)

@@ -6,8 +6,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelsModule = module {
-    viewModel { buildUserViewModelImpl(get()) }
+    viewModel { provideUserViewModel(get()) }
 }
 
-private fun buildUserViewModelImpl(userRepository: UserRepository) =
+private fun provideUserViewModel(userRepository: UserRepository) =
     UserViewModel(userRepository = userRepository)
