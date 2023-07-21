@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.githubnames.R
 import com.githubnames.databinding.FragmentUserBinding
+import com.githubnames.presentation.user.adapter.UserAdapter
 import com.githubnames.presentation.user.viewmodel.UserViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserFragment : Fragment(R.layout.fragment_user) {
@@ -16,6 +20,11 @@ class UserFragment : Fragment(R.layout.fragment_user) {
     private val binding get() = _binding!!
 
     private val userViewModel: UserViewModel by viewModel()
+    private var userAdapter: UserAdapter? = null
+
+    companion object {
+        private const val SPAN_COUNT = 2
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,8 +37,26 @@ class UserFragment : Fragment(R.layout.fragment_user) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener {
-            userViewModel.getAllUsers()
+        setupUsersList()
+        loadingData()
+    }
+
+    private fun loadingData() {
+        lifecycleScope.launch {
+            userViewModel.listData.collect { pagingData ->
+                userAdapter?.submitData(pagingData)
+            }
+        }
+    }
+
+    private fun setupUsersList() {
+        userAdapter = UserAdapter()
+        binding.userList.apply {
+            layoutManager = StaggeredGridLayoutManager(
+                SPAN_COUNT, StaggeredGridLayoutManager.VERTICAL
+            )
+            adapter = userAdapter
+            setHasFixedSize(true)
         }
     }
 }

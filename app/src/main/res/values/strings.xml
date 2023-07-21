@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GithubNames</string>
     <string name="label_user_fragment">User Fragment</string>
+    <string name="content_description_avatar_user">Image avatar of user</string>
 </resources>
