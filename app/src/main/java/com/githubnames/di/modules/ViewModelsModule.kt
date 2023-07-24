@@ -1,6 +1,7 @@
 package com.githubnames.di.modules
 
-import com.githubnames.domain.user.UserPagingSource
+import androidx.paging.PagingSource
+import com.githubnames.data.dto.UserDTO
 import com.githubnames.presentation.user.viewmodel.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -9,5 +10,5 @@ val viewModelsModule = module {
     viewModel { provideUserViewModel(get()) }
 }
 
-private fun provideUserViewModel(userPagingSource: UserPagingSource) =
-    UserViewModel(userPagingSource = userPagingSource)
+private fun provideUserViewModel(pagingSource: PagingSource<Int, UserDTO>) =
+    UserViewModel(userPagingSource = pagingSource)
