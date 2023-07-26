@@ -7,18 +7,18 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.cachedIn
-import com.githubnames.data.dto.UserDTO
+import com.githubnames.data.entities.User
 import kotlinx.coroutines.flow.Flow
 
 class UserViewModel(
-    private val userPagingSource: PagingSource<Int, UserDTO>
+    private val userPagingSource: PagingSource<Int, User>
 ) : ViewModel() {
 
     companion object {
         private const val PAGE_SIZE = 1
     }
 
-    val listData: Flow<PagingData<UserDTO>> = Pager(PagingConfig(pageSize = PAGE_SIZE)) {
+    val listData: Flow<PagingData<User>> = Pager(PagingConfig(pageSize = PAGE_SIZE)) {
         userPagingSource
     }.flow.cachedIn(viewModelScope)
 }
