@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface UserRemote {
 
-    @GET("/userss")
+    @GET("/users")
     suspend fun getAllUsers(): List<UserDTO>
 }
