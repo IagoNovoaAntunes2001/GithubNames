@@ -8,10 +8,11 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.cachedIn
 import com.githubnames.data.entities.User
+import com.githubnames.domain.user.UserPagingSource
 import kotlinx.coroutines.flow.Flow
 
 class UserViewModel(
-    private val userPagingSource: PagingSource<Int, User>
+    private val userPagingSource: UserPagingSource
 ) : ViewModel() {
 
     companion object {

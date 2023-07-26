@@ -2,4 +2,5 @@
     <string name="app_name">GithubNames</string>
     <string name="label_user_fragment">User Fragment</string>
     <string name="content_description_avatar_user">Image avatar of user</string>
+    <string name="message_error">There was an error in request, could you try again? \nJust swipe the screen, thank you.</string>
 </resources>
