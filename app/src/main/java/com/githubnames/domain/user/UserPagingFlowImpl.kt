@@ -17,7 +17,6 @@ class UserPagingFlowImpl(
     companion object {
         private const val PAGE_SIZE = 1
     }
-
     override fun getPagingData(): Flow<PagingData<User>> {
         return Pager(PagingConfig(pageSize = PAGE_SIZE)) {
             UserPagingSource(userRepository, userDataConverter)
